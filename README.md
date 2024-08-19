@@ -21,3 +21,5 @@ Feel free to add your own features/functions to the project, here's how you can 
 * Submit the pull request.
 ### Step 5: Wait for a merge
 ![Wait](https://github.com/user-attachments/assets/c2c4e334-52eb-4621-8756-a2b851c27839)
+
+###### { jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
