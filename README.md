@@ -3,7 +3,8 @@
 # 💡What is JM- ?
 An open-source, general purpose programming language.
 JM- (or JMDash) merges syntax of 2 core languages: C and C++
-
+# 📒[Documentation](https://jmdash.gitbook.io/jmdash-docs)
+You can find the [official documentation here.](https://jmdash.gitbook.io/jmdash-docs)
 # ❤️‍🔥Code contributions
 Feel free to add your own features/functions to the project, here's how you can contribute to JM-
 ## ✨Branching
