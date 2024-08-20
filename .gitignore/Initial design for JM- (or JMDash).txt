@@ -1,13 +1,12 @@
 /*
-Initial design for JM- (or JMDash) - 19/08/2024, jstmax!
-A quick explanation on its core syntax and the first functions.
-Note: This is a text file and since it has been made only to demonstrate the design behind JM- it still can't be compiled (since a compiler hasn't been created yet)
-
-(The comments work as in Cpp)
+Initial design for JM- (or JMDash) - jstmax, 19/08/2024
 { jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
 
+Here's a quick explanation on its core syntax and the first functions.
+(The comments work as in Cpp)
+
 Use '#incd .{library/header file name}' to import and use a library/header file.
-In this initial design file I'll explain the functions that are already "built-in" (so the ones that work without #including anything)
+In this initial design file we'll discuss the functions that are already "built-in" (so the ones that work without including anything)
 */
 
 con.out{}; // Stands for 'console.output' and, as the name says, it outputs "stuff" to the console, like text, variables or simple math.
@@ -30,16 +29,16 @@ Now that we got the basic syntax down, let's take a look at some other "built-in
 
 con.readline{} // Stands for 'console.readline{}' and, again as the name says, it reads the closest 'con.out{}' and can be used to write input from the user.
 // Example of use:
-con.out{<< "What you write's gonna get written in a variable, I warned you: "};
-str variableName; // Creates a variable (string type, we'll discuss data types) with no data.
+con.out{<< "What you write's gonna get written in a string, I warned you: "};
+str variableName; // Creates an empty string (which we'll discuss later)
 con.readline{>> variableName};
 /* Here's a little deep dive on how con.readline{}'s parameters work:
 After calling the function (e.g. 'con.readline') we open curly braces (e.g. 'con.readline{') and add two closed angle brackets, this tells the function to write the data that it reads to what comes after those two closed angle brackets, like a variable (e.g. 'con.readline{>> variableName}') then we have to "close the line" with a ';' character or add more variables so that con.readline{} will store the same data into more variables. (e.g. 'con.readline{>> variableName, variableName2};') */
 
 con.read{} // Stands for 'console.read' and exists as a more complete alternative to con.readline{}, it reads user's input from given parameter and can be used to write input from the user (e.g. in variables)
 // Example of use:
-str anotherVariableName; // Creates a variable (string type, we'll discuss this later) with no data
-con.read{con.out{<< "What you write's gonna get written in a variable, again, I warned you: "} >> anotherVariableName};
+str anotherVariableName; // Creates a string (which we'll discuss this later) with no data
+con.read{con.out{<< "What you write's gonna get written in a string, again, I warned you: "} >> anotherVariableName};
 /* As you might have imagined, the syntax is a bit more complicated than con.readline{}, but con.read{} can be more rewarding if used in more complicated instances.
 Here's a deeper explanation of its parameters and syntax:
 After calling the function, opening curly braces, we can insert the first parameter, if you want to ask a question to the user, and write user's input in a string variable, the syntax is shown in the above example, the first parameter is the actual source of user's input, so a question in our case, then we have the closed double angle brackets, that basically tell the function to write that input to something, and that something is in our case a variable. */
