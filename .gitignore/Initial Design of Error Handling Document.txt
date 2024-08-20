@@ -1,0 +1,273 @@
+/* Initial Design of Error Handling - 20/08/2024
+{ jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
+
+In the IDoEHD we'll discuss about how error handling will work in the initial release of JM-
+This document is considerable as the third part of the Initial Design for JM- (or JMDash) Document.
+
+Error handling in JM- works with 3 functions:
+`jtry{}`, `jcatch{}` and `jthrow{}`
+These three functions are included in the "Built-in" functions, so you do not need to #incd anything to use them in your project.
+
+Here's a quick example of how they work, i'll use this example to show how the C-Like spacing works: */
+jtry{<<
+    con.out{Hello World! but outside of quotes};
+}
+jcatch{SyntaxError/WrongSyntaxOnDataType/WrongSyntaxOnString>>
+    con.out{"Wrong characters used for string data!"};
+{
+
+/* So as you saw, we had jtry{} test an invalid statement (String-type data outside of quotes) and jcatch{} report that error to the user.
+There's one thing we now have to talk about,
+Error types and hierarchies.
+It's a long list, so that the errors can be as precise as possible without reaching unhuman levels.
+I highly recommend you to drink a cup of coffee before reading: */
+
+/* Here's a tree-like view of every error type in a hierarchy
+SyntaxError;
+    -> WrongSyntaxOnDataType;
+        // Category used in cases like the one we just saw, when entering a type of data without its proper syntax (in our case, missing quotes)
+        --> WrongSyntaxOnString;
+            // Specific case when there's the wrong character (or none) on string data (text)
+            // e.g. `str myString = MyText;` (missing quotes)
+        --> WrongSyntaxOnCharacter;
+            // Used in cases like ours, but with characters:
+            // e.g. `char myChar = '1';` or `char myChar = "A";` (wrong use of quotes)
+        --> WrongSyntaxOnInteger;
+            // e.g. `int myInteger = A;` or `int myInteger = "1";` (using non-numeric characters)
+        --> WrongSyntaxOnBoolean;
+            // e.g. `bool myBoolean = "A";` or `bool myBoolean = 1` (wrong syntax for boolean literals)
+        --> WrongSyntaxOnDouble;
+            // e.g. `dbl myDouble = A;` or `dbl myDouble = "0.99";` (using non-numeric or wrongly formatted data)
+
+    -> MissingSemicolon;
+        // Common error when the line doesn't end with a semicolon
+        // e.g. `int myInteger = 1` (missing semicolon)
+
+    -> MissingBraces;
+        // Error when opening or closing braces are missing in function definitions or control structures
+        --> MissingOpeningBrace;
+            // e.g. `if (condition) con.out{<< "Hello"; }` (missing `{` after `if`)
+        --> MissingClosingBrace;
+            // e.g. `if {condition > con.out{<< "Hello";` (missing `}` after condition or function)
+
+    -> UnexpectedToken;
+        // When a token that is not expected in the current context is found
+        // e.g. `int 1myInteger = 1;` (numeric character at the beginning of an identifier)
+        --> UnexpectedKeyword;
+            // e.g. `int return = 5;` (using a reserved keyword as an identifier)
+        --> UnexpectedSymbol;
+            // e.g. `int myInteger = @;` (use of an unexpected symbol in an expression)
+
+    -> UnclosedStringLiteral;
+        // When a string literal is not properly closed with a matching quote
+        // e.g. `str myString = "This string is not closed;` (missing closing quote)
+
+    -> InvalidAssignment;
+        // When there's an invalid assignment operation, such as trying to assign a value of the wrong type
+        --> AssigningToLiteral;
+            // e.g. `"Hello" = myString;` (attempt to assign a value to a literal)
+        --> InvalidOperatorUsage;
+            // e.g. `int myInteger = 1 + "2";` (invalid operation between different types)
+
+    -> IncorrectFunctionCallSyntax;
+        // Errors related to the incorrect syntax when calling a function
+        --> MissingFunctionName;
+            // e.g. `{<< "Hello World";}` (missing function name before braces)
+        --> MissingParameters;
+            // e.g. `con.out{}` (when parameters are expected but not provided)
+
+    -> UnmatchedParentheses;
+        // Error when parentheses are not properly matched in expressions
+        // e.g. `con.out{<< "Hello World!";` (missing closing parenthesis)
+
+    -> InvalidVariableDeclaration;
+        // Error in variable declaration, such as using invalid characters or wrong syntax
+        --> InvalidIdentifierName;
+            // e.g. `int 123abc = 5;` (identifier starts with a number)
+        --> MissingTypeSpecifier;
+            // e.g. `myVariable = 10;` (missing type declaration before variable)
+
+    -> IncorrectLoopSyntax;
+        // Errors specific to the syntax used in loops
+        --> IncorrectWhileLoopSyntax;
+            // e.g. `while myInteger == 1 > {con.out{<< "Looping";};` (missing braces around the condition)
+        --> IncorrectForLoopSyntax;
+            // e.g. `for {int i = 0; i < 10 i++} > {con.out{<< i};}` (missing semicolon in loop structure)
+
+    -> IncorrectConditionSyntax;
+        // Errors specific to the syntax used in conditional statements
+        --> IncorrectIfSyntax;
+            // e.g. `if myInteger == 1 {con.out{<< "It's 1!";};` (missing braces around condition)
+        --> IncorrectSwitchSyntax;
+            // e.g. `switch {myInteger} 1:{con.out{<< "It's 1!!";};` (missing arrow operator `>` after the switch condition)
+FSError;
+    -> FileNotFound;
+        // Error when attempting to access a file that does not exist
+        // e.g. `fs.rnw{>> "nonexistentfile.txt"};`
+
+    -> FileAlreadyExists;
+        // Error when trying to create a file that already exists without permission or the option to overwrite
+        // e.g. `fs.new{"existingfile.txt"};` (if overwriting is not allowed)
+
+    -> PermissionDenied;
+        // Error when the program lacks the necessary permissions to access, create, or modify a file
+        // e.g. `fs.rnw{>> "protectedfile.txt"};` (when trying to modify a read-only file)
+
+    -> InvalidFilePath;
+        // Error when the file path provided is invalid or incorrectly formatted
+        // e.g. `fs.new{>> "C:/Invalid/Path?name.txt"};`
+
+    -> DiskFull;
+        // Error when there is no space left on the disk to create or write to a file
+        // e.g. `fs.rnw{>> "bigfile.txt" << "Huge data block...";}`
+
+    -> FileCorrupted;
+        // Error when a file is found but is unreadable or corrupted
+        // e.g. `fs.rnw{>> "corruptedfile.txt" << con.out{}};` (when attempting to read from a corrupted file)
+
+    -> FileLocked;
+        // Error when the file is currently being used by another process and cannot be accessed
+        // e.g. `fs.rnw{>> "lockedfile.txt" << con.out{}};` (attempt to access a locked file)
+
+    -> InvalidFileOperation;
+        // Error when an invalid operation is attempted on a file, such as reading from a write-only file
+        // e.g. `fs.rnw{>> "writeonlyfile.txt" << con.out{}};` (attempt to read from a write-only file)
+
+    -> UnsupportedFileFormat;
+        // Error when attempting to read or write a file in an unsupported format
+        // e.g. `fs.rnw{>> "unsupportedfile.xyz"};`
+
+    -> PathTooLong;
+        // Error when the file path exceeds the maximum allowed length
+        // e.g. `fs.new{>> "C:/.../verylongfilename.txt"};`
+
+    -> FileAccessDenied;
+        // Error when access to a file is explicitly denied, even if permissions seem correct
+        // e.g. `fs.rnw{>> "restrictedfile.txt"};` (OS-level access denial)
+
+    -> FileNotWritable;
+        // Error when attempting to write to a file that is marked as read-only
+        // e.g. `fs.rnw{>> "readonlyfile.txt" << con.out{"Trying to write"};}`
+
+    -> FileNotReadable;
+        // Error when attempting to read a file that is not marked as readable
+        // e.g. `fs.rnw{>> "writeonlyfile.txt" << con.out{}};`
+
+    -> FileHandleError;
+        // Error related to issues with obtaining or releasing a file handle
+        // e.g. `fs.rnw{>> "somefile.txt" << con.out{}};` (when the file handle cannot be acquired or released properly)
+
+    -> DirectoryNotFound;
+        // Error when a specified directory does not exist
+        // e.g. `fs.new{>> "C:/nonexistentfolder/file.txt"};`
+
+    -> DirectoryNotWritable;
+        // Error when attempting to write to a directory that is not writable
+        // e.g. `fs.new{>> "C:/protectedfolder/file.txt"};`
+
+    -> DirectoryAccessDenied;
+        // Error when access to a directory is denied
+        // e.g. `fs.rnw{>> "C:/restrictedfolder/file.txt"};`
+
+    -> InvalidDirectoryOperation;
+        // Error when an invalid operation is attempted on a directory, such as trying to open it as a file
+        // e.g. `fs.rnw{>> "C:/somefolder"};` (attempt to read a directory as a file)
+MathError;
+    -> DivisionByZero;
+        // Error when attempting to divide a number by zero
+        // e.g. `mth.pwr{<< myInteger << 0};` (in cases where division is involved)
+
+    -> NegativeSquareRoot;
+        // Error when attempting to calculate the square root of a negative number
+        // e.g. `mth.sqrt{<< -myInteger};`
+
+    -> LogarithmOfNegative;
+        // Error when attempting to compute the logarithm of a negative number
+        // e.g. `mth.log{<< -myInteger};`
+
+    -> LogarithmOfZero;
+        // Error when attempting to compute the logarithm of zero
+        // e.g. `mth.log{<< 0};`
+
+    -> OverflowError;
+        // Error when a mathematical operation results in a value too large to be represented
+        // e.g. `mth.pwr{<< largeNumber << largeExponent};`
+
+    -> UnderflowError;
+        // Error when a mathematical operation results in a value too small to be represented
+        // e.g. `mth.pwr{<< smallNumber << largeNegativeExponent};`
+
+    -> NaNError;
+        // Error when an operation results in a NaN (Not a Number) value where it is not expected
+        // e.g. `mth.sqrt{<< myNaN};`
+
+    -> InfinityError;
+        // Error when an operation results in an infinite value where it is not expected
+        // e.g. `mth.pwr{<< largeNumber << largeExponent};`
+
+    -> InvalidOperation;
+        // Error when attempting an undefined or invalid mathematical operation
+        // e.g. `mth.log{<< "NotANumber"};` or `mth.pwr{<< "Text" << "Text"};`
+
+    -> OutOfDomain;
+        // Error when a function is called with a value outside its domain of definition
+        // e.g. `mth.sqrt{<< -myInteger};` (negative value for square root)
+
+    -> PrecisionLoss;
+        // Warning or error when a mathematical operation results in significant loss of precision
+        // e.g. `mth.pwr{<< veryLargeNumber << smallExponent};`
+
+    -> ComplexResultError;
+        // Error when an operation results in a complex number where only real numbers are expected
+        // e.g. `mth.sqrt{<< -myInteger};` (should produce a complex result, but real numbers are expected)
+TimeError;
+    -> InvalidTimestamp;
+        // Error when a timestamp is incorrectly formatted or invalid
+        // e.g. `tm.local{>> invalidTimestampVariable};`
+
+    -> TimeOverflow;
+        // Error when a time calculation exceeds the representable range
+        // e.g. Adding too much time to a timestamp causing an overflow
+
+    -> NegativeTime;
+        // Error when a time calculation results in a negative time value
+        // e.g. Subtracting a larger timestamp from a smaller one
+
+    -> TimezoneError;
+        // Error when an invalid or unsupported timezone is specified
+        // e.g. `tm.local{>> timeInInvalidTimezone};`
+
+    -> UnavailableSystemTime;
+        // Error when the system's local time cannot be accessed or retrieved
+        // e.g. `tm.local{>> timeVariable};` when the system clock is unavailable
+
+    -> TimeFormatError;
+        // Error when converting or formatting time in an unsupported or incorrect format
+        // e.g. `tm.local.str{>> timeVariableInWrongFormat};`
+
+    -> TimerNotStarted;
+        // Error when trying to access time since launch but the timer was not initialized or started
+        // e.g. `tm.sclc{>> timeSinceLaunchInteger};` without initializing the timer
+
+    -> TimeComparisonError;
+        // Error when comparing two timestamps that are not compatible or incomparable
+        // e.g. Trying to compare a local timestamp with an uninitialized or corrupt timestamp
+
+    -> DaylightSavingError;
+        // Error related to miscalculations or misinterpretations due to daylight saving changes
+        // e.g. Calculations done during daylight saving time shifts
+
+    -> InvalidTimeOperation;
+        // Error when performing an invalid operation with time values
+        // e.g. Adding a timestamp to a string or an unsupported data type
+*/
+
+/* Done, this is the FULL JM-'s Error Tree.
+Now we'll discuss about the last function that'll be introduced with the IDoEHD, `jthrow{}` */
+
+jthrow{>> SyntaxError/WrongSyntaxOnDataType/WrongSyntaxOnString};
+/* In this example we saw again how the error throwing system works, but here's an explanation.
+To throw an error in JM- you need to:
+1. Find the right error, i recommend using the error tree, which will be available on JM-'s Official Documentation Site too (e.g. 'SyntaxError/WrongSyntaxOnDataType/WrongSyntaxOnString')
+2. Throw the error using jthrow{}, the syntax is simple, as we've just seen. (e.g. `jthrow{>> SyntaxError/WrongSyntaxOnDataType/WrongSyntaxOnString};`)
+3. Done!
