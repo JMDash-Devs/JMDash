@@ -1,0 +1,48 @@
+/* Initial Design of Libraries Document - 20/08/2024
+{ jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
+
+In the IDoLD we'll discuss the '.frnw', '.jmath' and '.jtime'
+This document should be considerable as the second part of the Initial Design for JM- (or JMDash) Document.
+
+First thing: Let's include the libraries/header files we're gonna use
+As i already have mentioned in the IDD, you can include libraries/header files using '#incd' */
+
+#incd .frnw && .jmath && .jtime
+
+/* As you can see we can use JM-'s logical operators in #incd to include multiple libraries in a single line.
+
+Something that i forgot to point out in the IDD, is that JM- does not need to open a main() body, and what JM-'s Logical Operators are:
+&& - Logical "and", can be used in cases like the one shown above (e.g. in functions, like if{} to add multiple conditions)
+|| - Logical "or", can also be used in functions, but will not work in if{} conditions.
+! - Logical "not", i call this "Straight up lying." (e.g. returns false on a true boolean)
+
+Explanations will work like in the IDD, but cleaner, i hope. */
+
+
+// '.frnw' contains 2 functions:
+fs.new{}; // Stands for 'filesystem.new' and can be used to create files
+// (e.g. `fs.new{"fileName.txt"};` or `fs.new{>> "C:/LocationOnDisk/" << "fileName.txt"};)
+fs.rnw{}; // Stands for 'filesystem.readandwrite' and can be used to read, write and create files
+// (e.g. `fs.rnw{fs.new{"fileName.txt"} << con.out{"I'll be in a file!"}};)
+
+
+// '.jmath' contains 6 functions, more will be added after the init release:
+mth.sqrt{}; // Stands for 'math.squareroot' and can be used to get the square root of a number
+// (e.g. `mth.sqrt{<< myInteger};`)
+mth.log{}; // Stands for 'math.logarithm' and can be used to get the natural logarithm of a value.
+// (e.g. `mth.log{<< myInteger};`)
+mth.pwr{}; // Stands for 'math.power' and can be used to get the power of a value to another value.
+// (e.g. `mth.pwr{<< myPowerfulInteger << myInteger};`)
+mth.absl{}; // Stands for 'math.absolute' and can be used to get the absolute value of a value.
+// (e.g. `mth.absl{<< myAbsoluteInteger << myInteger};`)
+mth.fabs{}; // Stands for 'math.floatabsolute' and can be used to get the absolute value of a floating value.
+// (e.g. `mth.fabs{<< myAbsoluteFloat << myFloat};`)
+mth.nan{}; // Stands for 'math.notanumber' and can be used to get a NaN value.
+// (e.g. `mth.nan{>> myNaN};`)
+
+
+// '.jtime' contains 2 functions, ore will be added after the init release:
+tm.sclc{}; // Stands for 'time.sincelaunch' and can be used to get the amount of time that has passed since the program was launched.
+// (e.g. `tm.sclc{>> timeSinceLaunchInteger};`)
+tm.local{}; // Stands for 'time.local' and can be used to get the system's local hour in a timestamp.
+// (e.g. `tm.local.str{>> localTimeString};`) or (e.g. `tm.local.int{>> localTimeInteger};`)
