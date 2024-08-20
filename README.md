@@ -1,8 +1,7 @@
 ![JMDash - loGo](https://github.com/user-attachments/assets/33acd329-9c04-4170-9105-3a257fcfdace)
 
 # 💡What is JM- ?
-An open-source, general purpose programming language. \
-It merges the syntax of 2 core languages: C and C++ \
+An open-source, general purpose programming language, created with the intent of simplifying the distribution process to the FOSS community developers.
 To learn more [read the documentation](https://jmdash.gitbook.io/jmdash-docs).
 # 📒[..Documentation!](https://jmdash.gitbook.io/jmdash-docs)
 You can find the [official documentation here.](https://jmdash.gitbook.io/jmdash-docs) \
