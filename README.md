@@ -1,10 +1,12 @@
 ![JMDash - loGo](https://github.com/user-attachments/assets/33acd329-9c04-4170-9105-3a257fcfdace)
 
 # 💡What is JM- ?
-An open-source, general purpose programming language.
-JM- (or JMDash) merges syntax of 2 core languages: C and C++
-# 📒[Documentation](https://jmdash.gitbook.io/jmdash-docs)
-You can find the [official documentation here.](https://jmdash.gitbook.io/jmdash-docs)
+An open-source, general purpose programming language. \
+JM- (or JMDash) merges syntax of 2 core languages: C and C++ \
+To learn more [read the documentation](https://jmdash.gitbook.io/jmdash-docs).
+# 📒[..Documentation!](https://jmdash.gitbook.io/jmdash-docs)
+You can find the [official documentation here.](https://jmdash.gitbook.io/jmdash-docs) \
+Trust me when i say you *will* have to read it, or else the [syntax](https://jmdash.gitbook.io/jmdash-docs/jmbasics/syntax101) might end up killing you..
 # ❤️‍🔥Code contributions
 Feel free to add your own features/functions to the project, here's how you can contribute to JM-
 ## ✨Branching
