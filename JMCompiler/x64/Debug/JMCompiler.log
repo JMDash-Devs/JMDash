@@ -1,0 +1,3 @@
+﻿  JMCompiler.cpp
+F:\vscode REPOS\!a JMCompiler\JMCompiler\JMCompiler.cpp(243,91): warning C4267: 'argomento': conversione da 'size_t' a 'DWORD'. Possibile perdita di dati.
+  JMCompiler.vcxproj -> F:\vscode REPOS\!a JMCompiler\JMCompiler\x64\Debug\JMCompiler.exe
