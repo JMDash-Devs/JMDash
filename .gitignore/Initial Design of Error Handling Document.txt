@@ -14,7 +14,7 @@ jtry{<<
 }
 jcatch{SyntaxError/WrongSyntaxOnDataType/WrongSyntaxOnString>>
     con.out{"Wrong characters used for string data!"};
-{
+}
 
 /* So as you saw, we had jtry{} test an invalid statement (String-type data outside of quotes) and jcatch{} report that error to the user.
 There's one thing we now have to talk about,
