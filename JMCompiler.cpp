@@ -260,8 +260,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::string filePath = argv[1];  // Input file path
-    std::string exePath = argv[2];   // Output executable path
+    std::string filePath = argv[1];
+    std::string exePath = argv[2];
 
     jtry([&]() {
         std::string code = readFile(filePath);
@@ -269,7 +269,7 @@ int main(int argc, char* argv[]) {
         Parser parser(tokenizer);
         parser.parse();
 
-        std::vector<JJToken> tokens;  // Update with actual tokens if needed
+        std::vector<JJToken> tokens;
         IRGenerator irGenerator;
         std::ostringstream irOutput;
         irGenerator.generate(tokens, irOutput);
