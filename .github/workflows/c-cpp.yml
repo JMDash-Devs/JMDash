@@ -20,7 +20,7 @@ jobs:
       run: dir
 
     - name: Build with MSBuild
-      run: msbuild JMCompiler.sln /p:Configuration=Release
+      run: '"C:\Program Files\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" JMCompiler.sln /p:Configuration=Release'
 
     - name: Run tests
       run: ctest --output-on-failure
