@@ -1,10 +1,11 @@
-name: C/C++ CI
+name: Build and Release JMCompiler CLI
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,16 +13,41 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Print working directory
-      run: echo $PWD
 
-    - name: List files in working directory
-      run: dir
-
-    - name: Build with MSBuild
+    - name: Setup MSBuild
       run: |
         & "C:\Program Files\Microsoft Visual Studio\2022\BuildTools\MSBuild\Current\Bin\MSBuild.exe" JMCompiler.sln /p:Configuration=Release
 
-    - name: Run tests
-      run: ctest --output-on-failure
+    - name: Create Release Directory
+      run: mkdir release
+
+    - name: Copy Build Artifacts
+      run: |
+        copy /y JMCompiler\Release\*.* release\
+
+    - name: Archive Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: JMDash-Build
+        path: release/
+
+  release:
+    needs: build
+    runs-on: windows-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: JMCompiler-CLI-Build
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: 'cli-release'
+        release_name: 'JMCompiler CLI'
+        draft: true
+        prerelease: false
+        files: release\*
