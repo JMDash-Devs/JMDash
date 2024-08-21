@@ -8,16 +8,25 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Print working directory
+      run: echo $PWD
+
+    - name: List files in working directory
+      run: dir
+    
     - name: configure
       run: .\configure
+
     - name: make
       run: make
+    
     - name: make check
       run: make check
+    
     - name: make distcheck
       run: make distcheck
