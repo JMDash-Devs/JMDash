@@ -1,5 +1,5 @@
 <!-- OLD LOGO: ![JMDash - loGo](https://github.com/user-attachments/assets/33acd329-9c04-4170-9105-3a257fcfdace) -->
-![JMDash - Logo_v2 (icon and text)](https://github.com/user-attachments/assets/444e4084-be6e-42b1-874a-297b3e4da585)
+![JMDash - logoSide_v2](https://github.com/user-attachments/assets/9657a502-f02f-45dd-b6e9-d97c7b01054b)
 
 # 💡What is JM- ?
 An open-source, general purpose programming language, created with the intent of simplifying the distribution process to the FOSS community developers.
