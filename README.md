@@ -27,4 +27,7 @@ Feel free to add your own features/functions to the project, here's how you can 
 # 👍Other links
 JMDash logo folder (_v1 and _v2): [Proton Drive](https://drive.proton.me/urls/KPSY2191EW#q8hO81P3i26Q)
 
+&nbsp;
+## signatures;
+###### { JMD_Devs } @ { 67 69 74 68 75 62 2E 63 6F 6D 2F 6A 64 6D 61 73 68 2D 64 65 76 73 }
 ###### { jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
