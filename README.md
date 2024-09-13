@@ -1,11 +1,12 @@
-![JMDash - loGo](https://github.com/user-attachments/assets/33acd329-9c04-4170-9105-3a257fcfdace)
+<!-- OLD LOGO: ![JMDash - loGo](https://github.com/user-attachments/assets/33acd329-9c04-4170-9105-3a257fcfdace) -->
+![JMDash - Logo_v2 (icon and text)](https://github.com/user-attachments/assets/444e4084-be6e-42b1-874a-297b3e4da585)
 
 # 💡What is JM- ?
 An open-source, general purpose programming language, created with the intent of simplifying the distribution process to the FOSS community developers.
 To learn more [read the documentation](https://jmdash.gitbook.io/jmdash-docs).
 # 📒[..Documentation!](https://jmdash.gitbook.io/jmdash-docs)
 You can find the [official documentation here.](https://jmdash.gitbook.io/jmdash-docs) \
-Trust me when i say you *will* have to read it, or else the [syntax](https://jmdash.gitbook.io/jmdash-docs/jmbasics/syntax101) might end up killing you..
+Trust me when I say you *will* have to read it, or else the [syntax](https://jmdash.gitbook.io/jmdash-docs/jmbasics/syntax101) might end up killing you..
 # ❤️‍🔥Code contributions
 Feel free to add your own features/functions to the project, here's how you can contribute to JM-
 ## ✨Branching
@@ -23,5 +24,7 @@ Feel free to add your own features/functions to the project, here's how you can 
 * Submit the pull request.
 ### Step 5: Wait for a merge
 ![Waiting..](https://github.com/user-attachments/assets/21ac3f2d-0446-42fe-b86d-69999d7112f6)
+# 👍Other links
+JMDash logo folder (_v1 and _v2): [Proton Drive](https://drive.proton.me/urls/KPSY2191EW#q8hO81P3i26Q)
 
 ###### { jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
