@@ -3,10 +3,11 @@
 
 # 💡What is JM- ?
 An open-source, general purpose programming language, created with FOSS developers in mind
-To learn more [read the documentation](https://jmdash.gitbook.io/jmdash-docs).
-# 📒[..Documentation!](https://jmdash.gitbook.io/jmdash-docs)
+
+# 📒[JM- Docs](https://jmdash.gitbook.io/jmdash-docs)
 You can find the [official documentation here.](https://jmdash.gitbook.io/jmdash-docs) \
-Trust me when I say you *will* have to read it, or else the [syntax](https://jmdash.gitbook.io/jmdash-docs/jmbasics/syntax101) might end up killing you..
+Note that, if you want to learn JM- or contribute to it, you **will** need to read the docs.
+
 # ❤️‍🔥Code contributions
 Feel free to add your own features/functions to the project, here's how you can contribute to JM-
 ## ✨Branching
@@ -24,6 +25,7 @@ Feel free to add your own features/functions to the project, here's how you can 
 * Submit the pull request.
 ### Step 5: Wait for a merge
 ![Waiting..](https://github.com/user-attachments/assets/21ac3f2d-0446-42fe-b86d-69999d7112f6)
+
 # 👍Other links
 JMDash logo folder (_v1 and _v2): [Proton Drive](https://drive.proton.me/urls/KPSY2191EW#q8hO81P3i26Q)
 
