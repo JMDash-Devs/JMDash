@@ -1,0 +1,138 @@
+/*  The, Post Initial Design Document (or PIDD, for short)
+    { jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
+
+    ~~>
+        Reference dates:
+        Initial sketch-up for the, PIDD: [13/09/2024 @ ??:??:??]
+        Finalized version of  the, PIDD: [20/10/2024 @ 02:26:04]
+    ~~<
+
+Note: I'll try to make the, (Post) Design Documents cleaner than the IDD(s)
+
+In the, PIDD I'll explain to you some fundamental changes I made to JM-, plus some new features
+Let's start right off; */
+
+===== START OF SECTION 1 ======
+
+// So, the first big change obviously is the 'ability to append options', I'll explain;
+con.out{}; // No options appended
+con.out_pmod(all.caps){}; // Appended options: _pmod() with params all.caps
+// The 'ability to append options' is very important because I can use it to explain another change ;)
+// Definitions!
+
+// The first key change I made to the #def function: I described this edit as a "nerfed kinda buff" to the function, below an example;
+#def: functionName{
+    // Code here
+}
+
+// I also added macros, which we need to talk about before explaining the "nerfed kinda buff" thing;
+#def_macro(): macroName{
+    con.out{}; // Example function being called
+    // Other code here
+}
+
+/* Explanation;
+You no longer cannot define a function that just (only) runs other functions (or you can, but that's gonna be a macro),
+but you can now define a function that is more like a C class for example.
+The way you create this macros is by appending the _macro() option */
+
+#def: exampleNameTwo{} // Creates a function
+#def_macro(): exampleNameOne{} // Creates a macro
+
+/* Thanks to this update it has become really easy to understand how to create a custom library, which, just saying, is another thing we gotta talk about;
+
+A custom library in JM- is literally just a group of #def-initions
+So.. here's how custom libraries work (and how to write one yourself)
+Step by step guide:
+1. Create a `.jh` file
+2. Put this template into it and do your stuff basically (read the comments) */
+
+&(n*yourCustomLibraryName); // Syntax: &(n*<name>); n* stands for `name`
+&(l*jmd); // Syntax: &(l*<programmingLanguage>); l* stands for `language`
+&(c*(*)) { // Syntax: (example below) c* stands for `contents`
+    #def: exampleFunctionName{
+        // Function code
+    }
+
+    // Other #def-initions
+};
+&(a*(*)) {
+    #def_append: _exampleAppendName{
+        // Append code
+    }
+    // Other #def-ined appendables
+};
+
+&(eohf); // eof stands for `end of header file`
+
+/* Note 1: In the n* option the name you input HAS to be the same as the `.jh` file's name
+   Note 2: In the l* option the language name HAS to be in lower caps and without special char.s (e.g. `&(l*<jmd|c|cpp|python|csharp|etc..);`)
+   Note 3: In the c* option the (*) is just telling it to go look at the content pointed inside of the curly brackets
+   Note 4: Currently, the only supported language is,you would never guess it, JM- !
+   Note 5: You cannot #def_macro-s in a .jh file */
+
+===== END OF SECTION 1 ======
+===== START OF SECTION 2 ======
+
+// Now we will talk about some minor changes
+
+// 1. Introduction of the `_as` option to variables
+int firstVariable = 10;
+int_as(firstVariable) secondVariable;
+
+// 2. Introduction of character arrays
+char_array(5) exampleArray(a, b, c, d, e); // Syntax: char_array(<numberOfCharacters>) <arrayName>(<charactersInArray>);
+con.out{<< exampleArray(2)}; // Outputs `b` , Syntax: con.out{<< <arrayName>(<characterNumber>)};
+
+// 3. HUGE switch-es revamp
+int funnyInteger = 69;
+switch.int(funnyInteger) {
+    1*<70:
+        con.out{<< "It could be funny, is it 69??"};
+        sgo;
+    2*>70:
+        con.out{<< "This is not funny."};
+        sgo;
+    3*=69:
+        con.out{<< "LMAO ROTL xD KEKW"};
+        sgo;
+};
+/* So the syntax is;
+switch.<variableDataType>(<variableName>) {
+    <caseNum>*<condition>:
+        // Code here
+        sgo; // Stands for `switch.go.on;` literally just tells the switch to "check other cases"
+    // Other cases here
+    // Note: a switch{} function must have a minimum of 2 cases, the second one can be an empty case that just `sgo;`-es
+};
+*/
+
+/* 4. HUGE [every conditional statement] syntax revamp
+Syntax example;
+if (<condition>) : {
+    // Code here
+}
+else if (<condition>) : {
+    // Code here
+}
+else : {
+    // Code here
+};
+In the last statement (which can also be an if, if you want to) you must add an end_of_statement character (semicolon) */
+
+// 5. New library added: `.stdsysio`
+#incd .stdsysio
+
+sys.con{shell, "echo \"Hello World!\""};
+sys.con{win_cmd, "echo \"Hello World!\""}; // This will start up Windows' CMD and run the command `echo "Hello World!"`
+sys.con{bash, "echo \"Hello World!\""}; // Same, but using Bash
+
+str default_shell; // Creates an empty string
+sys.find{ find_shells(linux, default_shell, shellType=default) };  // Searches for the default shell in OS:linux and stores it in the `default_shell` string
+// This can be combined with:
+sys.con{default_shell, "echo \"Hello World!\""};
+
+// Now, receiving command output from the terminal:
+sys.con{bash, "ls", con.out_sys(.output); }; // Prints current directory's contents and prints them using con.out{}
+
+===== END OF SECTION 2 ======
