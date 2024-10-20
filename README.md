@@ -2,7 +2,7 @@
 ![JMDash - logoSide_v2](https://github.com/user-attachments/assets/9657a502-f02f-45dd-b6e9-d97c7b01054b)
 
 # 💡What is JM- ?
-An open-source, general purpose programming language, created with the intent of simplifying the distribution process to the FOSS community developers.
+An open-source, general purpose programming language, created with FOSS developers in mind
 To learn more [read the documentation](https://jmdash.gitbook.io/jmdash-docs).
 # 📒[..Documentation!](https://jmdash.gitbook.io/jmdash-docs)
 You can find the [official documentation here.](https://jmdash.gitbook.io/jmdash-docs) \
