@@ -2,13 +2,17 @@
 ![JMDash - logoSide_v2](https://github.com/user-attachments/assets/9657a502-f02f-45dd-b6e9-d97c7b01054b)
 
 # 💡What is JM- ?
-An open-source, general purpose programming language, created with FOSS developers in mind
+An open-source, general purpose programming language, created with FOSS developers in mind <3 \
+This is **still a one-man-project** so please have patience since I still **do not know** how much it'll take for the *init* release :3
 
-# 📒[JM- Docs](https://jmdash.gitbook.io/jmdash-docs)
+# 📒[Documentation](https://jmdash.gitbook.io/jmdash-docs)
 You can find the [official documentation here.](https://jmdash.gitbook.io/jmdash-docs) \
-Note that, if you want to learn JM- or contribute to it, you **will** need to read the docs.
+Note that, if you want to learn **JM-** or contribute to the project, you **will** need to read the docs.
 
 # ❤️‍🔥Code contributions
+**Note**: Pull requests are *temporarily* closed, at least until the *init* release of the **JMCompiler** \
+(You can send in pull requests, but they **won't** be reviewed)
+<!--
 Feel free to add your own features/functions to the project, here's how you can contribute to JM-
 ## ✨Branching
 ### Step 1: Fork the repository
@@ -25,9 +29,10 @@ Feel free to add your own features/functions to the project, here's how you can 
 * Submit the pull request.
 ### Step 5: Wait for a merge
 ![Waiting..](https://github.com/user-attachments/assets/21ac3f2d-0446-42fe-b86d-69999d7112f6)
+-->
 
-# 👍Other links
-JMDash logo folder (_v1 and _v2): [Proton Drive](https://drive.proton.me/urls/KPSY2191EW#q8hO81P3i26Q)
+# ⭐Other links
+**JMDash** logo folder (**_v1** and **_v2**): [[Proton Drive link]](https://drive.proton.me/urls/KPSY2191EW#q8hO81P3i26Q)
 
 &nbsp;
 ## signatures;
