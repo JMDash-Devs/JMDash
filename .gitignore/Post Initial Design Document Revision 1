@@ -23,7 +23,7 @@ arg.store{<< [1] >> firstArgument};
 if (firstArgument == "-h" || firstArgument == "--help") : {
     con.out{<< "List of available commands\n"};
     // Prints help message
-}
+};
 
 /* Syntax explanation;
 arg.store{<< [<argNum>] >> <stringVarName>}; // `arg.store{}` takes the given argument and stores its contents into the given variable
