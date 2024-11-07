@@ -1,0 +1,51 @@
+/*  The, Post Initial Design Document Revision 2 (or PIDD R2, for short)
+    { jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
+
+    ~~>
+        Reference dates:
+        Initial sketch version of the, PIDD R2: [11/10/2024 @ 02:27:11]
+        Finalized version of  the, PIDD R2: [07/11/2024 @ 17:24:12]
+    ~~<
+
+In the second revision of the, PIDD i'll explain to you the fundamental restructure of the conditional loop statements and the new `.jran` library.
+Let's start right off; */
+
+===== START OF SECTION 1 =====
+
+// `while`'s syntax got simpler and looks (and functions) more like other conditional statements, example;
+int i = 0;
+while (i < 5) : {
+    con.out{<< i << "\n"};
+    i<+;
+};
+
+// Like C++ there also is a `do`/`while` statement, that will execute a code block before checking the condition
+int i = 0;
+do : {
+    con.out{<< i << "\n"};
+    i<+;
+}
+while (i < 5);
+
+// Same goes for the `for` statement
+for (int i = 0, i < 5, i<+) : {
+    con.out{<< i << "\n"};
+};
+
+// Using the `for` statement you can also achieve a `foreach` loop
+int_array(5) myNumbers(10, 20, 30, 40, 50);
+for (myNumbers) : {
+  con.out{<< i << "\n"};
+};
+
+===== END OF SECTION 1 =====
+===== START OF SECTION 2 ====
+
+// This section is dedicated to the new `.jran` (or `JMDash Random`) library, let's start right off;
+
+int randomNumber;
+ran.int(length(min=1, max=1)){>> randomNumber}; // Generates a random number (integer) in the given integer variable (that is also 1 character long)
+ran.int(inNums(min=0, max=10), length(min=1, max=1)){>> randomNumber}; // Generates a random number (integer) that is between 0 and 10, in the given integer variable (that is also 1 character long)
+
+str randomString;
+ran.str(length(min=1, max=5), specialCharacters=false){>> randomString}; // Generates a random text string that is between 1 and 5 characters in length, without special characters, in the given string variable
