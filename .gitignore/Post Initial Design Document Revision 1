@@ -1,0 +1,35 @@
+/*  The, Post Initial Design Document Revision 1 (or PIDD R1, for short)
+    { jstmax! } @ { 62 69 74 2E 6C 79 2F 6D 78 5F 69 6E 66 6F }
+
+    ~~>
+        Reference date:
+        Finalized version of  the, PIDD R1: [07/11/2024 @ 13:10:22]
+    ~~<
+
+In the first revision of the, PIDD i'll explain to you how the argument handling will work in JM-
+Let's start right off; */
+
+// Argument related functions are contained in the `.jargh` library, so let's import it
+#incd .jargh // `.jargh` stands for `JMDash Argument Handler`
+
+// The first thing we're gonna do is check for arguments
+bool areThereAnyArguments;
+arg.chk{>> areThereAnyArguments}; // This will check if there are any arguments and store the result in the given boolean variable
+
+// Now we're gonna do something based on the given argument
+str firstArgument;
+arg.store{<< [1] >> firstArgument};
+
+if (firstArgument == "-h" || firstArgument == "--help") : {
+    con.out{<< "List of available commands\n"};
+    // Prints help message
+}
+
+/* Syntax explanation;
+arg.store{<< [<argNum>] >> <stringVarName>}; // `arg.store{}` takes the given argument and stores its contents into the given variable
+Remember that `arg.store{}` stores arguments chronologically, so;
+`./programName --firstArgument --secondArgument`
+"programName" is [0]
+"--firstArgument" is [1]
+"--secondArgument" is [2]
+*/
