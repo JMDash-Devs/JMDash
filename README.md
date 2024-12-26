@@ -1,3 +1,8 @@
+<!-- archival message -->
+# archived
+project archived indefinitely due to cease in development \
+## check out [this](https://github.com/jstmaxlol/jmdr) fork
+
 <!-- OLD LOGO: ![JMDash - loGo](https://github.com/user-attachments/assets/33acd329-9c04-4170-9105-3a257fcfdace) -->
 ![JMDash - logoSide_v2](https://github.com/user-attachments/assets/9657a502-f02f-45dd-b6e9-d97c7b01054b)
 
